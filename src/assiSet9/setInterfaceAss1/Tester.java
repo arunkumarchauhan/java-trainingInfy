@@ -2,11 +2,9 @@ package assiSet9.setInterfaceAss1;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-//Fails findDuplicates on verifying
 class Student {
 	private int studentId;
 	private String studentName;
@@ -75,37 +73,30 @@ class Tester {
 
 	public static Set<Student> findUnique(List<Student> students) {
 		// Implement your logic here and change the return statement accordingly
-		Set<Student> set = new HashSet<Student>();
-		for (Student s : students) {
-			if (!set.contains(s)) {
-				set.add(s);
-			} else
-				set.remove(s);
-		}
+		Set<Student> set1 = new HashSet<>();
+		for (int i = 0; i < students.size(); i++) {
 
-		return set;
+			set1.add(students.get(i));
+		}
+		return set1;
 	}
 
 	public static Set<Student> findDuplicates(List<Student> students) {
 		// Implement your logic here and change the return statement accordingly
-		Set<Student> uniqueSet = findUnique(students);
-		Set<Student> duplicateSet = new HashSet<Student>();
-//		for (Student s : students) {
-//			if (!uniqueSet.contains(s) && !duplicateSet.contains(s)) {
-//				duplicateSet.add(s);
-//			}
-//
-//		}
+		Set<Student> set1 = new HashSet<>();
+		Set<Student> res = new HashSet<>();
+		int s = 1;
 
-		Iterator<Student> itr = students.iterator();
-
-		while (itr.hasNext()) {
-			Student s = itr.next();
-			itr.remove();
-			if (students.contains(s))
-				duplicateSet.add(s);
+		for (int i = 0; i < students.size(); i++) {
+			set1.add(students.get(i));
+			if (set1.size() != s) {
+				res.add(students.get(i));
+				s--;
+			}
+			s++;
 		}
-		return duplicateSet;
+
+		return res;
 	}
 
 	public static void main(String[] args) {
